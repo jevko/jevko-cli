@@ -6,7 +6,9 @@ One `jevko` command to rule all Jevko formats.
 
 Experimental.
 
-Currently supports .jevkoml, .jevkodata, .jevkocfg.
+Currently supports .jevkoml, .jevkocfg.
+
+<!-- todo:, .jevkodata. -->
 
 Can convert the Jevko formats into well-known and well-supported formats (e.g. JSON, HTML, XML and XML-based formats, such as SVG).
 
