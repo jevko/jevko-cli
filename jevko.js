@@ -1,5 +1,6 @@
 import {jevkoml} from 'https://raw.githubusercontent.com/jevko/jevkoml/v0.3.3/jevkoml.js'
 import {jevkocfg} from 'https://raw.githubusercontent.com/jevko/jevkoconfig1.js/v0.1.1/jevkocfg.js'
+import {jevkodata} from 'https://raw.githubusercontent.com/jevko/jevkodata/v0.1.0/jevkodata.js'
 
 import {parseJevkoWithHeredocs} from 'https://cdn.jsdelivr.net/gh/jevko/parsejevko.js@v0.1.8/mod.js'
 
@@ -102,7 +103,7 @@ if (format === 'jevkoml') {
 } else if (format === 'jevkocfg') {
   result = jevkocfg(preppedJevko)
 } else if (format === 'jevkodata') {
-  throw Error("TODO: implement jevkodata -- jevkoconfig1.js reduced")
+  result = jevkodata(preppedJevko)
 } else throw Error(`Unrecognized format: ${format}`)
 
 if (output === undefined) console.log(result)
