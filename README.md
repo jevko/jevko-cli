@@ -121,13 +121,19 @@ Fortunately Deno is very nice and [easy to install](https://deno.land/manual@v1.
 
 These instructions will guide you through using Deno to install `jevko` as a command in your system, so that you can invoke it from anywhere.
 
-If you have [Deno installed](#dependencies) and Deno's installation root's bin directory (something like `/home/USER/.deno/bin`) [added to `PATH`](#tip-get-a-list-of-directories-in-your-path) then you can use the following command to install `jevko` directly from GitHub:
+If you have [Deno installed](#dependencies) and Deno's installation root's bin directory (something like `/home/USER/.deno/bin`) [added to `PATH`](#tip-get-a-list-of-directories-in-your-path) then you can use the following command to install `jevko` directly from GitHub master branch:
 
 ```
 deno install --allow-read --allow-write --allow-run https://raw.githubusercontent.com/jevko/jevko-cli/master/jevko.js
 ```
 
 Note: if you haven't added Deno's installation root to `PATH`, then `jevko` won't be recognized as a command.
+
+To install a specific version of jevko-cli, specify it in the URL in place of master:
+
+```
+deno install --allow-read --allow-write --allow-run https://raw.githubusercontent.com/jevko/jevko-cli/v0.1.0/jevko.js
+```
 
 ### Alternative: install without editing PATH
 
