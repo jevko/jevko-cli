@@ -1,4 +1,4 @@
-import {jevkoml} from 'https://raw.githubusercontent.com/jevko/jevkoml/v0.3.3/jevkoml.js'
+import {jevkoml} from 'https://raw.githubusercontent.com/jevko/jevkoml/v0.3.4/jevkoml.js'
 import {jevkocfg} from 'https://raw.githubusercontent.com/jevko/jevkoconfig1.js/v0.1.1/jevkocfg.js'
 import {jevkodata} from 'https://raw.githubusercontent.com/jevko/jevkodata/v0.1.0/jevkodata.js'
 
