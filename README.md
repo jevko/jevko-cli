@@ -6,9 +6,7 @@ One `jevko` command to rule all Jevko formats.
 
 Experimental.
 
-Currently supports .jevkoml, .jevkocfg.
-
-<!-- todo:, .jevkodata. -->
+Currently supports [.jevkoml](https://github.com/jevko/jevkoml), [.jevkocfg](https://github.com/jevko/jevkoconfig1.js), [.jevkodata](https://github.com/jevko/jevkodata).
 
 Can convert the Jevko formats into well-known and well-supported formats (e.g. JSON, HTML, XML and XML-based formats, such as SVG).
 
@@ -21,45 +19,6 @@ Jevko CLI manages various different Jevko formats with one command.
 It can be used to easily integrate Jevko formats into applications that deal with XML or JSON, providing facilities that can make authoring and maintaining HTML documents, XML or JSON configurations, SVG graphics, and countless XML-based formats much more enjoyable.
 
 <!-- In the future, JevkoML could also be used directly by various tools, for increased efficiency. -->
-
-## Examples
-
-For example, Jevko CLI can convert something like this:
-
-<!-- [ ] see a version with syntax highlighting (htmlpreview), [x] get a syntax highlighting extension for visual studio code -->
-
-![screenshot](screenshot.png)
-
-into something like this:
-
-```HTML
-<html>
-  <head>
-    <title>This is a title</title>
-  </head>
-  <body>
-    <div>
-      <p>Hello world!</p>
-      <abbr
-        id="anId"
-        class="jargon"
-        style="color: purple;"
-        title="Hypertext Markup Language"
-      >HTML</abbr>
-      <a href="https://www.wikipedia.org/">
-        A link to Wikipedia!
-      </a>
-      <p>
-        Oh well, <span lang="fr">c'est la vie</span>, as they say in France.
-      </p>
-    </div>
-  </body>
-</html>
-```
-
-See [the jevkoml project on GitHub](https://github.com/jevko/jevkoml) for details.
-
-Also see the [.jevkoml syntax highlighting extension for Visual Studio Code](https://github.com/jevko/jevkoml-basic-highlighting-vscode) which was used to produce the screenshot above.
 
 ## Usage
 
