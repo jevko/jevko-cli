@@ -6,21 +6,62 @@ import {parseJevkoWithHeredocs} from 'https://cdn.jsdelivr.net/gh/jevko/parsejev
 
 import {readTextFileSync, readStdinText, writeTextFileSync} from './io.js'
 
-import { dirname, join, extname } from "https://deno.land/std@0.165.0/path/mod.ts";
+import { dirname, join, extname, isAbsolute } from "https://deno.land/std@0.165.0/path/mod.ts";
+
+// todo: import from library
+import { map, prep as prepdata } from './jevkodatatemp.js'
 
 // todo: exactly 1?
 let source
 let dir
 let format
+
+const getArgmap = () => {
+  const argj = prepdata(parseJevkoWithHeredocs(Deno.args.join(' ')))
+  const argmap = map(argj.subjevkos)
+
+  const fileName = argj.suffix.trim()
+
+  if (fileName !== '') {
+    if ('input' in argmap) throw Error('oops')
+    argmap.input = fileName
+  }
+  return argmap
+}
+
+const withoutShebang = source => {
+  if (source.startsWith('#!')) {
+    const index = source.indexOf('\n')
+    if (index === -1) return ""
+    return source.slice(index)
+  }
+  return source
+}
+
+
+// console.log(map(argj.subjevkos), argj, Deno.args, `|${argj.suffix.trim()}|`)
+
+let argmap
 if (Deno.args.length > 0) {
-  const fileName = Deno.args[0]
-  source = readTextFileSync(fileName)
+  argmap = getArgmap()
+} else {
+  argmap = Object.create(null)
+}
+
+if ('format' in argmap) {
+  format = argmap.format
+}
+
+if ('input' in argmap) {
+  const fileName = argmap.input
+  source = withoutShebang(readTextFileSync(fileName))
   dir = dirname(fileName)
-  format = extname(fileName).slice(1)
+  // format from args overrides extension
+  // alternatively could error if extension doesn't match
+  if (format === undefined) format = extname(fileName).slice(1)
 } else {
   source = await readStdinText()
   dir = '.'
-  // todo: read format from /jevko directive
 }
 
 const jevko = parseJevkoWithHeredocs(source)
@@ -46,53 +87,43 @@ const listOfString = jevko => {
   return ret
 }
 
-//?todo: rename /output to /to file
 const prep = jevko => {
   const {subjevkos, ...rest} = jevko
 
-  let output, format
-  const subs = []
-  for (const sub of subjevkos) {
-    const {prefix, jevko} = sub
+  let subs
+  let props = Object.create(null)
+  if (subjevkos.length > 0) {
+    let i = 0
+    const sub0 = subjevkos[0]
+    const pref = sub0.prefix
 
-    const trimmed = prefix.trim()
+    if (pref.trim() === '') {
+      // interpret top-level directives
+      const tjevko = sub0.jevko
+      const xyz = prepdata(tjevko)
+      props = map(xyz.subjevkos)
 
-    // top-level directives
-    //?todo: perhaps stop reading when trimmed.startsWith('/') === false (i.e., they must all appear at the very top to be valid; otoh should allow hashbang, so perhaps sth like breakPrefix should be utilized)
-    if (trimmed.startsWith('/')) {
-      const directive = trimmed.slice(1).trim()
-      // todo: maybe support import & paste here as well
-      // paste: how to be consistent accross formats?
-      if (directive === 'jevko') {
-        // enforce only one occurence of the directive
-        if (format !== undefined) throw Error('oops')
-        format = string(jevko)
-        continue
-      } else if (directive === 'output') {
-        // enforce only one occurence of the directive
-        if (output !== undefined) throw Error('oops')
-        output = string(jevko)
-        continue
-      }
-      // else throw Error(`unknown directive: ${tag}`)
+      ++i
     }
 
-    subs.push(sub)
+    subs = subjevkos.slice(i)
+  } else {
+    subs = []
   }
 
   return {
     jevko: {subjevkos: subs, ...rest},
-    output,
-    format,
+    props,
   }
 }
 
-const {jevko: preppedJevko, output, format: f} = prep(jevko)
+const {jevko: preppedJevko, props} = prep(jevko)
 
 if (format === undefined) {
-  format = f
+  format = props.format
 } else {
-  if (f !== undefined && format !== f) throw Error(`extension and declared format inconsistent`)
+  const f = props.format
+  if (f !== undefined && format !== f) throw Error(`declared format (${format}) inconsistent with command line format or file extension (${f})`)
 }
 
 let result
@@ -106,5 +137,7 @@ if (format === 'jevkoml') {
   result = jevkodata(preppedJevko)
 } else throw Error(`Unrecognized format: ${format}`)
 
+
+const {output} = props
 if (output === undefined) console.log(result)
 else writeTextFileSync(join(dir, output), result)
