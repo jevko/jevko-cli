@@ -1,15 +1,12 @@
 import {jevkoml} from 'https://raw.githubusercontent.com/jevko/jevkoml/v0.3.4/jevkoml.js'
 import {jevkocfg} from 'https://raw.githubusercontent.com/jevko/jevkoconfig1.js/v0.1.1/jevkocfg.js'
-import {jevkodata} from 'https://raw.githubusercontent.com/jevko/jevkodata/v0.1.0/jevkodata.js'
+import {jevkodata, map, prep as prepdata} from 'https://raw.githubusercontent.com/jevko/jevkodata/v0.2.0/mod.js'
 
 import {parseJevkoWithHeredocs} from 'https://cdn.jsdelivr.net/gh/jevko/parsejevko.js@v0.1.8/mod.js'
 
 import {readTextFileSync, readStdinText, writeTextFileSync} from './io.js'
 
 import { dirname, join, extname, isAbsolute } from "https://deno.land/std@0.165.0/path/mod.ts";
-
-// todo: import from library
-import { map, prep as prepdata } from './jevkodatatemp.js'
 
 // todo: exactly 1?
 let source
@@ -37,9 +34,6 @@ const withoutShebang = source => {
   }
   return source
 }
-
-
-// console.log(map(argj.subjevkos), argj, Deno.args, `|${argj.suffix.trim()}|`)
 
 let argmap
 if (Deno.args.length > 0) {
