@@ -6,11 +6,11 @@ One `jevko` command to rule all Jevko formats.
 
 Experimental.
 
-Currently supports [.jevkoml](https://github.com/jevko/jevkoml), [.jevkocfg](https://github.com/jevko/jevkoconfig1.js), [.jevkodata](https://github.com/jevko/jevkodata).
+Currently supports [.jevkoml](https://github.com/jevko/jevkoml), [.jevkodata](https://github.com/jevko/jevkodata), [.jevkocfg](https://github.com/jevko/jevkoconfig1.js).
 
 Can convert the Jevko formats into well-known and well-supported formats (e.g. JSON, HTML, XML and XML-based formats, such as SVG).
 
-Conversion in the other direction is coming soon.
+Can also convert from JSON to .jevkodata. More conversion options are planned.
 
 Jevko formats are generally much more pleasant to read, write, edit, or generate -- by hand or otherwise.
 
@@ -140,8 +140,16 @@ By default, Jevko CLI infers the Jevko format of the input file by extension. Yo
 ]
 ```
 
+## Directives
 
-## Features coming soon
+### import files as jevkos or text
 
-<!-- todo: this should be a separate lib (perhaps local to this repo) -->
-* import files as jevkos or text (currently implemented in jevkoml)
+<!-- todo: describe -->
+
+```
+/import [filename]
+```
+
+```
+/paste [filename]
+```

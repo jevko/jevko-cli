@@ -2,7 +2,7 @@ import {map, prep as prepdata} from 'https://raw.githubusercontent.com/jevko/jev
 
 import {parseJevkoWithHeredocs} from 'https://cdn.jsdelivr.net/gh/jevko/parsejevko.js@v0.1.8/mod.js'
 
-import {main as main_v0_2_0} from 'https://raw.githubusercontent.com/jevko/jevko-cli/v0.2.0/main.js'
+import {main as main_v0_2} from 'https://raw.githubusercontent.com/jevko/jevko-cli/v0.2.1/main.js'
 
 import {main} from './main.js'
 
@@ -24,10 +24,10 @@ const argmap = getArgmap()
 
 const {version} = argmap
 if (version !== undefined) {
-  if (version === '0.2.0') {
+  if (version.startsWith('0.2')) {
     // const main = await import('https://raw.githubusercontent.com/jevko/jevko-cli/v0.2.0/main.js')
 
-    main_v0_2_0(argmap)
+    main_v0_2(argmap)
   } else throw Error(`Unknown version: ${version}`)
 } else {
   main(argmap)
