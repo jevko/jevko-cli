@@ -1,6 +1,6 @@
 import {jevkoml} from 'https://raw.githubusercontent.com/jevko/jevkoml/v0.4.0/jevkoml.js'
 import {jevkocfg} from 'https://raw.githubusercontent.com/jevko/jevkoconfig1.js/v0.1.1/jevkocfg.js'
-import {readTextFileSync, readStdinText, writeTextFileSync} from './io.js'
+import {readTextFileSync, readStdinText, writeTextFileSync, mkdirRecursiveSync} from './io.js'
 import {jevkodata, map, prep as prepdata, prettyFromJsonStr} from 'https://raw.githubusercontent.com/jevko/jevkodata/v0.2.1/mod.js'
 
 import {importDirective} from './importDirective.js'
@@ -73,11 +73,11 @@ const write = (result, options) => {
   if (output === undefined) console.log(result)
   else {
     if (isAbsolute(output)) {
-      Deno.mkdirSync(dirname(output), {recursive: true})
+      mkdirRecursiveSync(dirname(output), {recursive: true})
       writeTextFileSync(output, result)
     } else {
       const outpath = join(dir, output)
-      Deno.mkdirSync(dirname(outpath), {recursive: true})
+      mkdirRecursiveSync(dirname(outpath), {recursive: true})
       writeTextFileSync(outpath, result)
     }
   }

@@ -16,3 +16,7 @@ export const readStdinText = async () => {
   }
   return src
 }
+
+export const mkdirRecursiveSync = (path) => {
+  Deno.mkdirSync(path, {recursive: true})
+}
