@@ -1,4 +1,4 @@
-import {main} from '../../main.js'
+import {main} from '../../portable/main.js'
 import { assertEquals } from "https://deno.land/std@0.165.0/testing/asserts.ts";
 import * as path from "https://deno.land/std@0.57.0/path/mod.ts";
 

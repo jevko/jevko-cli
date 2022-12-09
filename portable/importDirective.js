@@ -1,7 +1,5 @@
-
-import { dirname, join, isAbsolute } from "https://deno.land/std@0.165.0/path/mod.ts";
-import {readTextFileSync} from './io.js'
-import {parseJevkoWithHeredocs} from 'https://cdn.jsdelivr.net/gh/jevko/parsejevko.js@v0.1.8/mod.js'
+import { dirname, join, isAbsolute, readTextFileSync } from "../nonportable/deps.js";
+import {parseJevkoWithHeredocs} from '../deps.b.js'
 
 //?todo: extract to a separate lib
 //?todo: handle via streaming (requires rearchitecting and rewriting the entire jevko cli)

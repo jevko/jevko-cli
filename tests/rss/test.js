@@ -1,4 +1,4 @@
-import {main} from '../../main.js'
+import {main} from '../../portable/main.js'
 import { assertEquals } from "https://deno.land/std@0.165.0/testing/asserts.ts";
 
 Deno.test('rss', async () => {

@@ -1,13 +1,8 @@
-import {jevkoml} from 'https://raw.githubusercontent.com/jevko/jevkoml/v0.4.0/jevkoml.js'
-import {jevkocfg} from 'https://raw.githubusercontent.com/jevko/jevkoconfig1.js/v0.1.1/jevkocfg.js'
-import {readTextFileSync, readStdinText, writeTextFileSync, mkdirRecursiveSync} from './io.js'
-import {jevkodata, map, prep as prepdata, prettyFromJsonStr} from 'https://raw.githubusercontent.com/jevko/jevkodata/v0.2.1/mod.js'
+import {jevkoml, jevkocfg, jevkodata, map, prep as prepdata, prettyFromJsonStr, parseJevkoWithHeredocs} from '../deps.b.js'
 
 import {importDirective} from './importDirective.js'
 
-import {parseJevkoWithHeredocs} from 'https://cdn.jsdelivr.net/gh/jevko/parsejevko.js@v0.1.8/mod.js'
-
-import { dirname, join, extname, isAbsolute } from "https://deno.land/std@0.165.0/path/mod.ts";
+import {dirname, join, extname, isAbsolute, readTextFileSync, readStdinText, writeTextFileSync, mkdirRecursiveSync} from '../nonportable/deps.js'
 
 export const main = async (argmap = {}) => {
   let {format, input} = argmap

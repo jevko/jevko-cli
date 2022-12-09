@@ -4,7 +4,7 @@ import {parseJevkoWithHeredocs} from 'https://cdn.jsdelivr.net/gh/jevko/parsejev
 
 import {main as main_v0_2} from 'https://raw.githubusercontent.com/jevko/jevko-cli/v0.2.1/main.js'
 
-import {main} from './main.js'
+import {main} from './portable/main.js'
 
 const getArgmap = () => {
   if (Deno.args.length === 0) return Object.create(null)
@@ -22,6 +22,8 @@ const getArgmap = () => {
 
 const argmap = getArgmap()
 
+//?todo: perhaps resolve versions according to semver and indeed use dynamic import with ${ver} -- take the --allow-net hit
+// alternatively have a separate jevko-cli front which handles versions
 const {version} = argmap
 if (version !== undefined) {
   if (version.startsWith('0.2')) {
