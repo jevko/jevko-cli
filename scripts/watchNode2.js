@@ -5,6 +5,7 @@ const targetPath = '/home/daro/git/github/@jevko/jevko-vscode/src/node/'
 // create dirs if not exist
 Deno.mkdirSync(targetPath + 'portable', { recursive: true });
 Deno.mkdirSync(targetPath + 'nonportable', { recursive: true });
+Deno.mkdirSync(targetPath + 'bundlable', { recursive: true });
 
 const watcher = Deno.watchFs(["./node"]);
 

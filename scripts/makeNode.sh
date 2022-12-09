@@ -1,2 +1,2 @@
 cp -r portable node
-deno bundle deps.b.js node/deps.b.js
+deno bundle bundlable/deps.b.js node/bundlable/deps.b.js

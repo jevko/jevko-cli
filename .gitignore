@@ -1,2 +1,5 @@
 local/
 tests/**/out
+bundlable/deps.blocal.js
+node/portable/
+node/bundlable/
