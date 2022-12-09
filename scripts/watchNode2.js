@@ -1,6 +1,16 @@
 import { dirname, join, extname, isAbsolute, relative, basename } from "https://deno.land/std@0.165.0/path/mod.ts";
 
-const targetPath = '/home/daro/git/github/@jevko/jevko-vscode/src/node/'
+import localConfig from '../localConfig.json' assert { type: "json" }
+
+const targetPath = localConfig.jevkoVscodeTargetPath
+
+if (targetPath === '$INVALID$') {
+  const p = Deno.run({
+    cmd: ['notify-send', `[jevko-cli live script] invalid local configuration!`]
+  })
+  await p.status()
+  throw Error('invalid local configuration!')
+}
 
 // create dirs if not exist
 Deno.mkdirSync(targetPath + 'portable', { recursive: true });
