@@ -1,0 +1,1 @@
+cp deps.bremote.js deps.b.js

@@ -1,0 +1,1 @@
+cp deps.blocal.js deps.b.js
