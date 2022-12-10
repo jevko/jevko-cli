@@ -20,3 +20,13 @@ export const readStdinText = async () => {
 export const mkdirRecursiveSync = (path) => {
   Deno.mkdirSync(path, {recursive: true})
 }
+
+export const existsSync = path => {
+  try {
+    Deno.lstatSync(path)
+    return true
+  } catch (e) {
+    if (e instanceof Deno.errors.NotFound) return false
+    throw e
+  }
+}

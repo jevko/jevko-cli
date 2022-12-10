@@ -2,7 +2,7 @@ import {jevkoml, jevkocfg, jevkodata, map, prep as prepdata, prettyFromJsonStr, 
 
 import {importDirective} from './importDirective.js'
 
-import {dirname, join, extname, isAbsolute, readTextFileSync, readStdinText, writeTextFileSync, mkdirRecursiveSync} from '../nonportable/deps.js'
+import {dirname, join, extname, basename, isAbsolute, readTextFileSync, readStdinText, writeTextFileSync, mkdirRecursiveSync, existsSync} from '../nonportable/deps.js'
 
 export const main = async (argmap = {}) => {
   let {format, input} = argmap
@@ -64,14 +64,35 @@ export const main = async (argmap = {}) => {
 //?todo: create path if not exists
 const write = (result, options) => {
   //?todo: rename /output to /to file
-  const {output, dir} = options
+  let {output, dir, flags} = options
+
+  // infer output from input
+  if (output === undefined && Array.isArray(flags) && flags.includes('infer output')) {
+    const {input, format} = options
+    if (input !== undefined) {
+      const name = basename(input, extname(input))
+
+      if (format === 'jevkoml') {
+        output = name + '.xml'
+      } else if (format === 'jevkodata') {
+        output = name + '.json'
+      } else if (format === 'json') {
+        output = name + '.jevkodata'
+      }
+    }
+  }
+
   if (output === undefined) console.log(result)
   else {
     if (isAbsolute(output)) {
+      // todo: ask if overwrite
+      // if (existsSync(output))
       mkdirRecursiveSync(dirname(output), {recursive: true})
       writeTextFileSync(output, result)
     } else {
       const outpath = join(dir, output)
+      // todo: ask if overwrite
+      // if (existsSync(outpath))
       mkdirRecursiveSync(dirname(outpath), {recursive: true})
       writeTextFileSync(outpath, result)
     }
