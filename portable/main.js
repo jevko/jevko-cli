@@ -82,19 +82,33 @@ const write = (result, options) => {
     }
   }
 
+  // a helper fn
+  const commit = (output) => {
+    // ask if overwrite
+    if (existsSync(output)) {
+      const {overwrite} = options
+
+      if (typeof overwrite === 'function') {
+        if (overwrite(output) === false) return
+      } else if (typeof overwrite === 'boolean') {
+        if (overwrite === false) return
+      } else {
+        // note: default overwrite = false
+        throw Error(`File ${output} exists!`)
+      }
+    }
+    mkdirRecursiveSync(dirname(output), {recursive: true})
+    writeTextFileSync(output, result)
+  }
+
+  // todo: console.log makes no sense in vscode interface
   if (output === undefined) console.log(result)
   else {
     if (isAbsolute(output)) {
-      // todo: ask if overwrite
-      // if (existsSync(output))
-      mkdirRecursiveSync(dirname(output), {recursive: true})
-      writeTextFileSync(output, result)
+      commit(output)
     } else {
       const outpath = join(dir, output)
-      // todo: ask if overwrite
-      // if (existsSync(outpath))
-      mkdirRecursiveSync(dirname(outpath), {recursive: true})
-      writeTextFileSync(outpath, result)
+      commit(outpath)
     }
   }
 }
