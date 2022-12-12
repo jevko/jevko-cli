@@ -142,7 +142,7 @@ const extractOptions = source => {
       }
       ++depth
     } else if (c === ']') {
-      if (depth === 0) throw Error('oops')
+      if (depth === 0) throw Error(`Unbalanced ] while parsing options!`)
       --depth
       if (depth === 0) {
         const optionsText = source.slice(a, i)
@@ -158,5 +158,6 @@ const extractOptions = source => {
       }
     }
   }
-  throw Error('oops')
+  if (depth > 0) throw Error(`Error while parsing options: unexpected end before ${depth} brackets closed!`)
+  throw Error(`Error while parsing options!`)
 }
