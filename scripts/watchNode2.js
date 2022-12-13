@@ -13,11 +13,9 @@ if (targetPath === '$INVALID$') {
 }
 
 // create dirs if not exist
-Deno.mkdirSync(targetPath + 'portable', { recursive: true });
-Deno.mkdirSync(targetPath + 'nonportable', { recursive: true });
-Deno.mkdirSync(targetPath + 'bundlable', { recursive: true });
+Deno.mkdirSync(targetPath, { recursive: true });
 
-const watcher = Deno.watchFs(["./node"]);
+const watcher = Deno.watchFs(["./node/bundle.js"]);
 
 for await (const event of watcher) {
   console.log(">>>> event", event);
