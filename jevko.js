@@ -4,7 +4,7 @@ import {parseJevkoWithHeredocs} from 'https://cdn.jsdelivr.net/gh/jevko/parsejev
 
 import {main as main_v0_2} from 'https://raw.githubusercontent.com/jevko/jevko-cli/v0.2.1/main.js'
 
-import {main} from './portable/main.js'
+import {main} from 'https://raw.githubusercontent.com/jevko/jevko-interface.js/v0.1.2/portable/main.js'
 
 const getArgmap = () => {
   if (Deno.args.length === 0) return Object.create(null)
