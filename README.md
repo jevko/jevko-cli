@@ -114,9 +114,9 @@ To output to a file instead of the standard output, you can either use the redir
 jevko filename.jevkoml > outputfile.html
 ```
 
-Or you can put an `output` directive with the output file name at the top of the input file:
+Or you can put an `output` option with the output file name at the top of the input file:
 
-<!-- todo: describe the new way of doing directives -- probly change name of directives to sth else -->
+<!-- todo: describe options -->
 
 ```
 [
@@ -132,7 +132,7 @@ jevko filename.jevkoml
 
 it will output to `outputfile.html` instead of standard output.
 
-By default, Jevko CLI infers the Jevko format of the input file by extension. You can also specify the format by putting the `format` directive at the top of the input file:
+By default, Jevko CLI infers the Jevko format of the input file by extension. You can also specify the format by putting the `format` option at the top of the input file:
 
 ```
 [
@@ -152,4 +152,5 @@ By default, Jevko CLI infers the Jevko format of the input file by extension. Yo
 
 ```
 /paste [filename]
+/paste [path [filename] tag [heredoc tag]]
 ```
