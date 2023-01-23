@@ -14,7 +14,7 @@ const getArgmap = () => {
   const fileName = argj.suffix.trim()
 
   if (fileName !== '') {
-    if ('input' in argmap) throw Error('oops')
+    if ('input' in argmap) throw Error(`File name in suffix conflicts with the 'input' option: use one or the other!`)
     argmap.input = fileName
   }
   return argmap
